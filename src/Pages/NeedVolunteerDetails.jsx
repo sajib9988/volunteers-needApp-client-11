@@ -1,4 +1,5 @@
-import  { useContext, useState, useEffect } from 'react';
+import { VscChromeClose } from 'react-icons/vsc'; // Make sure to import the icon
+import { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLoaderData } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -65,6 +66,10 @@ const NeedVolunteerDetails = () => {
     e.preventDefault();
     if (!user) {
       return toast.error('Please log in to volunteer.');
+    }
+
+    if (user.email === organizerEmail) {
+      return toast.error('Organizers cannot volunteer for their own posts.');
     }
 
     const formData = {
@@ -144,7 +149,12 @@ const NeedVolunteerDetails = () => {
           }}
           contentLabel='Volunteer Request Modal'
         >
-          <h2 className='text-2xl font-bold mb-4'>{post_title}</h2>
+          <div className='flex justify-between items-center mb-4 w-[450px]'>
+            <h2 className='text-2xl font-bold'>{post_title}</h2>
+            <button onClick={closeModal} className='text-gray-600 border w-[28px] h-[28px] rounded-full flex justify-center items-center hover:text-gray-800'>
+              <VscChromeClose />
+            </button>
+          </div>
           <form onSubmit={handleFormSubmission}>
             <div className='mb-4'>
               <label className='block text-gray-700' htmlFor='email'>
@@ -183,7 +193,7 @@ const NeedVolunteerDetails = () => {
             <div className='flex justify-end'>
               <button
                 type='submit'
-                className='px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600'
+                className='px-4 py-2 bg-green-300 text-black rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600'
               >
                 Request Volunteer
               </button>
