@@ -6,21 +6,21 @@ const MyPosts = () => {
   const { user } = useContext(AuthContext);
   const [myPosts, setMyPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const fetchMyPosts = async () => {
+    setIsLoading(true);
+    try {
+      // Use user.organizer.email if that's where the email is nested
+      const response = await axios.get(`https://assignment-11-server-side-navy.vercel.app/my-posts?email=${user?.email}`);
+      setMyPosts(response.data);
+      console.log("Fetched posts:", response.data); // Log the fetched data
+    } catch (error) {
+      console.error("Error fetching my posts:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchMyPosts = async () => {
-      setIsLoading(true);
-      try {
-        // Use user.organizer.email if that's where the email is nested
-        const response = await axios.get(`https://assignment-11-server-side-navy.vercel.app/my-posts?email=${user?.email}`);
-        setMyPosts(response.data);
-        console.log("Fetched posts:", response.data); // Log the fetched data
-      } catch (error) {
-        console.error("Error fetching my posts:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+   
 
     if (user?.email) {
       fetchMyPosts();
