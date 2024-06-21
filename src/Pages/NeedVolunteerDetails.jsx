@@ -18,17 +18,20 @@ const NeedVolunteerDetails = () => {
 
   // Destructure properties from the `need` object
   const {
-    _id,
-    post_title,
-    description,
-    location,
-    volunteersNeeded,
-    deadline,
-    category,
-    organizerName,
-    organizerEmail,
-    thumbnail,
+    _id,                // Unique identifier for the volunteer post
+    postTitle,          // Title of the volunteer post
+    description,        // Description of the volunteer post
+    location,           // Location where volunteers are needed
+    volunteersNeeded,   // Number of volunteers needed
+    deadline,           // Deadline to apply for volunteering
+    category,           // Category of the volunteer post (e.g., Healthcare)
+    organizer,          // Organizer details (name and email are nested within this object)
+    thumbnail,          // URL of the thumbnail image for the post
   } = need;
+  const { 
+    name: organizerName, // Organizer's name
+    email: organizerEmail // Organizer's email
+  } = organizer;
 
   const [startDate, setStartDate] = useState(new Date());
   const [formValues, setFormValues] = useState({
@@ -78,7 +81,7 @@ const NeedVolunteerDetails = () => {
       email: user.email,
       status: 'Pending',
       deadline: startDate,
-      post_title,
+      postTitle,
       category,
       organizer_email: organizerEmail,
       organizer_name: organizerName,
@@ -107,7 +110,7 @@ const NeedVolunteerDetails = () => {
           </span>
         </div>
         <div>
-          <h1 className='mt-2 text-3xl font-semibold text-gray-800'>{post_title}</h1>
+          <h1 className='mt-2 text-3xl font-semibold text-gray-800'>{postTitle}</h1>
           <p className='mt-2 text-lg text-gray-600'>{description}</p>
           <p className='mt-2 text-lg text-gray-600'>Location: {location}</p>
           <p className='mt-2 text-lg text-gray-600'>Volunteers Needed: {volunteersNeeded}</p>
@@ -119,14 +122,14 @@ const NeedVolunteerDetails = () => {
             </div>
           </div>
         </div>
-        <img src={thumbnail} alt={post_title} className='mt-4 rounded-md' />
+        <img src={thumbnail} alt={postTitle} className='mt-4 rounded-md' />
 
         <div className='mt-4'>
           <button
             onClick={openModal}
             className='px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600'
           >
-            Request Volunteer
+            Be a Volunteer
           </button>
         </div>
 
@@ -150,7 +153,7 @@ const NeedVolunteerDetails = () => {
           contentLabel='Volunteer Request Modal'
         >
           <div className='flex justify-between items-center mb-4 w-[450px]'>
-            <h2 className='text-2xl font-bold'>{post_title}</h2>
+            <h2 className='text-2xl font-bold'>{postTitle}</h2>
             <button onClick={closeModal} className='text-gray-600 border w-[28px] h-[28px] rounded-full flex justify-center items-center hover:text-gray-800'>
               <VscChromeClose />
             </button>

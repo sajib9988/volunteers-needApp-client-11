@@ -20,7 +20,7 @@ const Navbar = () => {
             <Link className='font-bold ' to='/'>Home</Link>
           </li>
           <li>
-            <Link className='font-bold' to='/all-posts'>All Post</Link>
+            <Link cla to='/all-posts'>All Post</Link>
           </li>
 
           {!user && (
@@ -58,7 +58,7 @@ const Navbar = () => {
                 <Link to='/my-posts'>My Posts</Link>
               </li>
               <li>
-                <Link to='/my-request'>My Request</Link>
+                <Link to='/myRequest'>My Request</Link>
               </li>
               <li>
                 <Link to='/volunteer-requests'>Volunteer Request</Link>

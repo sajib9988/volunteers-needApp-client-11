@@ -51,8 +51,9 @@ const router = createBrowserRouter([
         element: <MyPosts />,
       },
       {
-        path: '/my-request',
+        path: '/myRequest',
         element: <MyRequest />,
+        // loader: ({params})=> fetch(`https://assignment-11-server-side-navy.vercel.app/myRequest/${params.email}`)
       },
       {
         path: '/volunteer-requests',
