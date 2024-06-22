@@ -12,6 +12,7 @@ import MyPosts from '../Pages/MyPosts'
 import MyRequest from '../Pages/MyRequest'
 import VolunteerRequests from '../Pages/VolunteerRequests'
 import NeedVolunteerDetails from './../Pages/NeedVolunteerDetails';
+import Update from '../Pages/Update'
 
 const router = createBrowserRouter([
   {
@@ -32,13 +33,18 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
+        path: '/update/:id',
+        element: <Update/>,
+        loader: ({params})=> fetch(`https://assignment-11-server-side-navy.vercel.app/update/${params.id}`),
+      },
+      {
         path: '/add-volunteer-post',
         element: <AddVolunteerPost />,
       },
       {
         path: '/all-posts',
         element: <AllPosts />,
-      },
+      }, 
       {
         path: '/detailsPage/:id',
         element: <NeedVolunteerDetails />,
