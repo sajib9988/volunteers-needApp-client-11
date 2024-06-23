@@ -20,7 +20,7 @@ const Navbar = () => {
             <Link className='font-bold ' to='/'>Home</Link>
           </li>
           <li>
-            <Link cla to='/all-posts'>All Post</Link>
+            <Link className='font-bold' to='/all-posts'>All Post</Link>
           </li>
 
           {!user && (
@@ -50,7 +50,7 @@ const Navbar = () => {
               className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
             >
               <li>
-                <Link to='/add-volunteer-post' className='justify-between'>
+                <Link to='/add-volunteer-post' className='justify-between fond-bold'>
                   Add Need Volunteer
                 </Link>
               </li>
