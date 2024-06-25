@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast"; // Import toast from react-hot-toast
 
 const MyPosts = () => {
   const { user } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const MyPosts = () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `https://assignment-11-server-side-navy.vercel.app/my-posts?email=${user?.email}`
+        `http://localhost:5000/my-posts?email=${user?.email}`
       );
       setMyPosts(response.data);
       console.log("Fetched posts:", response.data);
@@ -29,26 +30,21 @@ const MyPosts = () => {
     }
   }, [user]);
 
-  // const handleUpdatePost = (postId) => {
-  //   axios.put(
-  //     `https://assignment-11-server-side-navy.vercel.app/posts/${postId}`
-  //   );
-  //   console.log("Update post with id:", postId);
-  // };
-
   const handleDeletePost = async (postId) => {
     try {
       await axios.delete(
-        `https://assignment-11-server-side-navy.vercel.app/posts/${postId}`
+        `http://localhost:5000/posts/${postId}`
       );
       setMyPosts(myPosts.filter((post) => post._id !== postId));
+      toast.success("Post deleted successfully"); // Show success toast
     } catch (error) {
       console.error("Error deleting post:", error);
+      toast.error("Failed to delete post"); // Show error toast
     }
   };
 
   return (
-    <div className="container mx-auto p-4 ">
+    <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">My Posts</h1>
       {isLoading ? (
         <p>Loading...</p>
@@ -57,7 +53,7 @@ const MyPosts = () => {
           {myPosts.length === 0 ? (
             <p>No posts found.</p>
           ) : (
-            <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {myPosts.map((post) => (
                 <div
                   key={post._id}
@@ -80,8 +76,8 @@ const MyPosts = () => {
                       <strong>Location:</strong> {post.location}
                     </p>
                     <div className="flex justify-between">
-                    <Link to={`/update/${post._id}`}>
-                        <button className="bg-blue-500 text-white px-3 py-1 rounded"> 
+                      <Link to={`/update/${post._id}`}>
+                        <button className="bg-blue-500 text-white px-3 py-1 rounded">
                           Update
                         </button>
                       </Link>

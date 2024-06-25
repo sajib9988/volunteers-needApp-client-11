@@ -33,7 +33,7 @@ const NeedVolunteerDetails = () => {
     email: organizerEmail // Organizer's email
   } = organizer;
 
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(new Date(deadline));
   const [formValues, setFormValues] = useState({
     email: '',
     comment: '',
@@ -88,7 +88,7 @@ const NeedVolunteerDetails = () => {
     };
 
     try {
-      await axios.post('https://assignment-11-server-side-navy.vercel.app/volunteer-request', formData);
+      await axios.post('http://localhost:5000/volunteer-request', formData);
       toast.success('Volunteer Request Sent Successfully!');
       closeModal();
       navigate('/');
@@ -99,7 +99,7 @@ const NeedVolunteerDetails = () => {
   };
 
   return (
-    <div className='flex flex-col md:flex-row justify-around gap-5 items-center min-h-[calc(100vh-306px)] md:max-w-screen-xl mx-auto'>
+    <div className='flex flex-col md:flex-row justify-around gap-5 items-center min-h-[calc(100vh-306px)] mt-3 md:max-w-screen-xl mx-auto'>
       <div className='flex-1 px-4 py-7 bg-white rounded-md shadow-md md:min-h-[350px]'>
         <div className='flex items-center justify-between'>
           <span className='text-sm font-bold bg-green-500 text-gray-800 p-2 rounded-lg'>
@@ -122,7 +122,7 @@ const NeedVolunteerDetails = () => {
             </div>
           </div>
         </div>
-        <img src={thumbnail} alt={postTitle} className='mt-4 rounded-md' />
+        <img src={thumbnail} alt={postTitle} className='mt-4 h-[400px] w-full rounded-md' />
 
         <div className='mt-4'>
           <button
@@ -174,13 +174,14 @@ const NeedVolunteerDetails = () => {
             </div>
             <div className='mb-4'>
               <label className='block text-gray-700' htmlFor='comment'>
-                Comment
+                Comment <span className="text-red-500">*</span>
               </label>
               <textarea
                 id='comment'
                 name='comment'
                 value={formValues.comment}
                 onChange={handleInputChange}
+                required
                 className='block w-full px-3 py-2 mt-1 text-gray-800 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
                 rows='4'
               />
@@ -191,6 +192,7 @@ const NeedVolunteerDetails = () => {
                 className='block w-full px-3 py-2 mt-1 text-gray-800 bg-white border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
+                readOnly
               />
             </div>
             <div className='flex justify-end'>

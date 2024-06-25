@@ -12,9 +12,8 @@ const MyRequests = () => {
     const fetchRequests = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`https://assignment-11-server-side-navy.vercel.app/myRequest/${user?.email}`);
+        const response = await axios.get(`http://localhost:5000/myRequest/${user?.email}`);
         setRequests(response.data);
-        // console.log(response.data);
       } catch (error) {
         console.error('Error fetching organizer requests:', error);
       } finally {
@@ -29,9 +28,11 @@ const MyRequests = () => {
 
   const handleApprove = async (id) => {
     try {
-      await axios.patch(`https://assignment-11-server-side-navy.vercel.app/myRequest/${id}/approve`);
-      toast.success('Request approved successfully');
-      updateRequestStatus(id, 'Approved');
+      const response = await axios.patch(`http://localhost:5000/myRequestApprove/${id}`);
+      if (response.status === 200) {
+        toast.success('Request approved successfully');
+        updateRequestStatus(id, 'Approved');
+      }
     } catch (error) {
       console.error('Error approving request:', error);
       toast.error('Failed to approve request');
@@ -40,9 +41,11 @@ const MyRequests = () => {
 
   const handleReject = async (id) => {
     try {
-      await axios.patch(`https://assignment-11-server-side-navy.vercel.app/myRequest/${id}/reject`);
-      toast.success('Request rejected successfully');
-      updateRequestStatus(id, 'Rejected');
+      const response = await axios.patch(`http://localhost:5000/myRequest/${id}/reject`);
+      if (response.status === 200) {
+        toast.success('Request rejected successfully');
+        updateRequestStatus(id, 'Rejected');
+      }
     } catch (error) {
       console.error('Error rejecting request:', error);
       toast.error('Failed to reject request');
@@ -60,8 +63,8 @@ const MyRequests = () => {
   if (isLoading) return <p>Data is still loading...</p>;
 
   return (
-    <section className='mx-auto container ' >
-      <h1 className='text-center font-bold  ' >Organizer Requests ({requests.length} Requests)</h1>
+    <section className='mx-auto container'>
+      <h1 className='text-center font-bold'>Organizer Requests ({requests.length} Requests)</h1>
       <div className='flex flex-col mt-6 mx-auto container'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
           <div className='inline-block min-w-full py-2 align-middle md:px-6 lg:px-8'>

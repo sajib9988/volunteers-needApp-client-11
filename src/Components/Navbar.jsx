@@ -1,31 +1,44 @@
-
-import { useContext } from 'react'
-
-
-import { Link } from 'react-router-dom'
+import { useContext } from 'react';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
+
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   return (
-    <div className='navbar bg-base-100 shadow-sm container px-4 mx-auto'>
-      <div className='flex-1'>
-        <Link to='/' className='flex gap-2 items-center'>
-
-          <span className='font-bold'>Volunteer</span>
-        </Link>
+    <div className='navbar bg-base-100 shadow-sm container px-4 mx-auto flex justify-between items-center'>
+      <div className='flex gap-2 items-center'>
+        <span className='font-bold'>Volunteer</span>
+      </div>
+      <div className='flex-1 flex justify-center'>
+        <ul className='menu menu-horizontal px-1'>
+          <li>
+            <NavLink 
+              className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+              to='/'
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink 
+              className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+              to='/all-posts'
+            >
+              All Post
+            </NavLink>
+          </li>
+        </ul>
       </div>
       <div className='flex-none'>
         <ul className='menu menu-horizontal px-1'>
-          <li>
-            <Link className='font-bold ' to='/'>Home</Link>
-          </li>
-          <li>
-            <Link className='font-bold' to='/all-posts'>All Post</Link>
-          </li>
-
           {!user && (
             <li>
-              <Link to='/login'>Login</Link>
+              <NavLink 
+                className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+                to='/login'
+              >
+                Login
+              </NavLink>
             </li>
           )}
         </ul>
@@ -50,20 +63,38 @@ const Navbar = () => {
               className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52'
             >
               <li>
-                <Link to='/add-volunteer-post' className='justify-between fond-bold'>
+                <NavLink 
+                  className={({ isActive }) => isActive ? 'justify-between font-bold text-green-600 underline' : 'justify-between font-bold'}
+                  to='/add-volunteer-post'
+                >
                   Add Need Volunteer
-                </Link>
+                </NavLink>
               </li>
               <li>
-                <Link to='/my-posts'>My Posts</Link>
+                <NavLink 
+                  className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+                  to='/my-posts'
+                >
+                  My Posts
+                </NavLink>
               </li>
               <li>
-                <Link to='/myRequest'>My Request</Link>
+                <NavLink 
+                  className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+                  to='/myRequest'
+                >
+                  My Request
+                </NavLink>
               </li>
               <li>
-                <Link to='/volunteer-requests'>Volunteer Request</Link>
+                <NavLink 
+                  className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+                  to='/volunteer-requests'
+                >
+                  Volunteer Request
+                </NavLink>
               </li>
-              <li className='mt-2'>
+              <li className='mt-2 font-bold'>
                 <button
                   onClick={logOut}
                   className='bg-gray-200 block text-center'
@@ -76,7 +107,7 @@ const Navbar = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const AllPosts = () => {
+const Cards = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -28,12 +28,12 @@ const AllPosts = () => {
 
   return (
     <div className="container mx-auto px-4 py-8 mt-6">
-      <h1 className="text-2xl font-bold mb-6 text-center">All Posts</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">Volunteer Posts</h1>
       {isLoading ? (
         <p className="text-center">Loading...</p>
       ) : (
         <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {allPosts.map((post) => (
+          {allPosts.slice(0, 6).map((post) => (
             <div
               key={post._id}
               className="bg-white p-4 rounded-md shadow-md flex flex-col justify-between"
@@ -63,7 +63,7 @@ const AllPosts = () => {
               </div>
               <Link
                 to={`/detailsPage/${post._id}`}
-                className="mt-4 text-center  font-bold bg-black p-2 text-white rounded-lg hover:text-blue-700"
+                className="mt-4 text-center font-bold bg-black p-2 text-white rounded-lg hover:text-blue-700"
               >
                 View Details
               </Link>
@@ -75,4 +75,4 @@ const AllPosts = () => {
   );
 };
 
-export default AllPosts;
+export default Cards;

@@ -44,10 +44,10 @@ const AddVolunteerPost = () => {
     };
 
     try {
-      const  data  = await axios.post('https://assignment-11-server-side-navy.vercel.app/addVolunteers', volunteerPostData);
+      const  data  = await axios.post('http://localhost:5000/addVolunteers', volunteerPostData);
       console.log(data);
       toast.success('Volunteer Post Added Successfully!');
-      navigate('/my-posted-volunteer-positions');
+      navigate('/');
     } catch (err) {
       console.error(err);
       toast.error('Error adding volunteer post.');
