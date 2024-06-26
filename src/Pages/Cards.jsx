@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Cards = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -10,9 +12,7 @@ const Cards = () => {
   const fetchPosts = async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get(
-        "http://localhost:5000/posts"
-      ); // Adjust endpoint as per your API
+      const { data } = await axios.get("http://localhost:5000/posts"); // Adjust endpoint as per your API
       setAllPosts(data);
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -26,6 +26,12 @@ const Cards = () => {
     fetchPosts(); // Fetch all posts initially
   }, []);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1500, // Customize the duration
+    });
+  }, []);
+
   return (
     <div className="container mx-auto px-4 py-8 mt-6">
       <h1 className="text-2xl font-bold mb-6 text-center">Volunteer Posts</h1>
@@ -37,6 +43,7 @@ const Cards = () => {
             <div
               key={post._id}
               className="bg-white p-4 rounded-md shadow-md flex flex-col justify-between"
+              data-aos="flip-left" // Add the data-aos attribute here
             >
               <img
                 src={post.thumbnail}
