@@ -1,14 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
-
-
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-// import Navbar from "../Navbar";
 
 const Login = () => {
-    const { signIn, signInWithGoogle, user, loading } = useContext(AuthContext);
+    const { signInUser, signInWithGoogle, user, loading } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const from = location.state?.from?.pathname || '/';
@@ -19,45 +16,51 @@ const Login = () => {
         }
     }, [navigate, user]);
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        const form = new FormData(e.currentTarget);
-        const email = form.get('email');
-        const password = form.get('password');
-        console.log(email, password);
-
-        try {
-            const result = await signIn(email, password);
-            console.log(result.user);
-            const { data } = await axios.post(
-                `${import.meta.env.VITE_API_URL}/jwt`,
-                { email: result.user.email },
-                { withCredentials: true }
-            );
-            console.log(data);
-            toast.success('Signin Successful');
-            navigate(from, { replace: true });
-        } catch (error) {
-            console.error(error);
-            toast.error(error?.message);
-        }
-    };
-
     const handleGoogleSignIn = async () => {
         try {
+            // 1. Google sign in from firebase
             const result = await signInWithGoogle();
             console.log(result.user);
+
+            // 2. Get token from server using email
             const { data } = await axios.post(
-                `${import.meta.env.VITE_API_URL}/jwt`,
-                { email: result.user.email },
+                `http://localhost:5000/jwt`,
+                { email: result?.user?.email },
+                { withCredentials: true }
+            );
+            console.log(data);
+            toast.success('SignIn Successful');
+            navigate(from, { replace: true });
+        } catch (err) {
+            console.log(err);
+            toast.error(err?.message);
+        }
+    };
+// email signIn form firebase
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const pass = form.password.value;
+        console.log({ email, pass });
+
+        try {
+            // User login
+            const result = await signInUser(email, pass);
+            console.log(result.user);
+
+            // Get token from server using email
+            const { data } = await axios.post(
+                `http://localhost:5000/jwt`,
+                { email: result?.user?.email },
                 { withCredentials: true }
             );
             console.log(data);
             toast.success('Signin Successful');
             navigate(from, { replace: true });
-        } catch (error) {
-            console.error("Error during Google Sign-In: ", error);
-            toast.error(error?.message);
+        } catch (err) {
+            console.log(err);
+            toast.error(err?.message);
         }
     };
 
@@ -65,7 +68,6 @@ const Login = () => {
 
     return (
         <div>
-            {/* <Navbar /> */}
             <div className="flex flex-col lg:flex-row">
                 <div className="w-full lg:w-1/2">
                     <iframe
@@ -83,7 +85,7 @@ const Login = () => {
                     >
                         Sign in with Google
                     </button>
-                    <form onSubmit={handleLogin} className="w-3/4 md:w-1/2">
+                    <form onSubmit={handleSignIn} className="w-3/4 md:w-1/2">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>

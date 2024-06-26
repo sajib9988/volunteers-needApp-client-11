@@ -1,13 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
-
 import { useContext, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { Helmet } from "react-helmet";
-// import axios from 'axios';
+
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import Navbar from "../Navbar";
+
+import axios from "axios";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -47,19 +47,16 @@ const Register = () => {
       toast.success("Registration successful and profile updated!");
       console.log("Profile updated with name and photo URL.");
 
-    //   const { data } = await axios.post(
-    //     `${import.meta.env.VITE_API_URL}/jwt`,
-    //     {
-    //       email: result.user.email,
-    //     },
-    //     { withCredentials: true }
-    //   );
+      const { data } = await axios.post(
+        `http://localhost:5000/jwt`,
+        { email: result?.user?.email },
+        { withCredentials: true }
+      );
 
-    //   console.log("JWT token received:", data);
-    //   toast.success("JWT token received!");
-    //   // Optionally redirect the user
+      console.log("JWT token received:", data);
+      toast.success("JWT token received!");
+      // Optionally redirect the user
       navigate("/login");
-
     } catch (error) {
       console.error("Error creating user or updating profile:", error);
       toast.error("Registration failed. Please try again.");
@@ -71,7 +68,7 @@ const Register = () => {
       <Helmet>
         <title>Register</title>
       </Helmet>
-      <Navbar></Navbar>
+  
       <div className="container w-[500px] mx-auto mt-9">
         <div className="hero-content">
           <div className="card shrink-0 w-full max-w-md shadow-2xl bg-base-100">
@@ -131,9 +128,7 @@ const Register = () => {
                 </label>
               </div>
               {errorMessage && (
-                <div className="text-red-500 text-sm mb-2">
-                  {errorMessage}
-                </div>
+                <div className="text-red-500 text-sm mb-2">{errorMessage}</div>
               )}
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Register</button>

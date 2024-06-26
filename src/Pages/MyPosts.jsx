@@ -13,7 +13,7 @@ const MyPosts = () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/my-posts?email=${user?.email}`
+        `http://localhost:5000/my-posts?email=${user?.email}`,{withCredentials:true}
       );
       setMyPosts(response.data);
       console.log("Fetched posts:", response.data);

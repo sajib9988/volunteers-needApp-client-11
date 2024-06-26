@@ -12,7 +12,7 @@ const MyRequests = () => {
     const fetchRequests = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`http://localhost:5000/myRequest/${user?.email}`);
+        const response = await axios.get(`http://localhost:5000/myRequest/${user?.email}`,{withCredentials:true});
         setRequests(response.data);
       } catch (error) {
         console.error('Error fetching organizer requests:', error);

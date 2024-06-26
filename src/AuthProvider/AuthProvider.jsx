@@ -1,6 +1,5 @@
 import { 
     GoogleAuthProvider, 
-    
     createUserWithEmailAndPassword, 
     onAuthStateChanged, 
     signInWithEmailAndPassword, 
@@ -10,6 +9,7 @@ import {
 } from "firebase/auth";
 import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from 'react';
+import axios from 'axios'; // Make sure you have axios imported
 import auth from './Firebase/firebase.config';
 
 // 1. Create and Export Auth Context
@@ -20,11 +20,11 @@ const googleProvider = new GoogleAuthProvider();
 // const facebookProvider = new FacebookAuthProvider();
 
 const AuthProvider = ({ children }) => {
-    // // 3. State Management
+    // 3. State Management
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // // 4. Auth Functions
+    // 4. Auth Functions
     const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
@@ -45,9 +45,14 @@ const AuthProvider = ({ children }) => {
     //     return signInWithPopup(auth, facebookProvider);
     // }
 
-    const logOut = () => {
+    const logOut = async () => {
         setLoading(true);
-        return signOut(auth);
+        const { data } = await axios('http://localhost:5000/logout', {
+          withCredentials: true,
+        });
+        console.log(data);
+        await signOut(auth);
+        setLoading(false);
     }
 
     const updateUserProfile = (displayName, photoURL) => {
@@ -55,20 +60,18 @@ const AuthProvider = ({ children }) => {
         return updateProfile(auth.currentUser, { displayName, photoURL });
     }
 
-    // // 5. Effect to Observe Auth State Changes
-
+    // 5. Effect to Observe Auth State Changes
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
           console.log("user in the auth state changed", currentUser);
           setUser(currentUser);
-          setLoading(false)
+          setLoading(false);
         });
         return () => {
           unSubscribe();
         };
-      }, []);
+    }, []);
  
-
     // 6. Context Value
     const authInfo = { 
         user, 

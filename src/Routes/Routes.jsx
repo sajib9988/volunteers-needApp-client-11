@@ -13,6 +13,7 @@ import MyRequest from '../Pages/MyRequest'
 import VolunteerRequests from '../Pages/VolunteerRequests'
 import NeedVolunteerDetails from './../Pages/NeedVolunteerDetails';
 import Update from '../Pages/Update'
+import PrivateRoute from './PrivateRoute'
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/add-volunteer-post',
-        element: <AddVolunteerPost />,
+        element: <PrivateRoute><AddVolunteerPost /></PrivateRoute>,
       },
       {
         path: '/all-posts',
@@ -47,7 +48,7 @@ const router = createBrowserRouter([
       }, 
       {
         path: '/detailsPage/:id',
-        element: <NeedVolunteerDetails />,
+        element: <PrivateRoute><NeedVolunteerDetails /></PrivateRoute>,
         loader: ({ params }) => fetch(`http://localhost:5000/detailsPage/${params.id}`),
       }
       ,
