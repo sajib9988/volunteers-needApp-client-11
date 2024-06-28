@@ -7,7 +7,7 @@ import 'swiper/css/effect-flip';
 
 const Banner = () => {
     return (
-        <div className='container mx-auto mt-6 mb-6'>
+        <div className='container mx-auto mt-6 mb-6 sm:px-5'>
             <Swiper
                 modules={[Navigation, Pagination, Scrollbar, A11y, EffectFlip, Autoplay]}
                 spaceBetween={50}

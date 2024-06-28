@@ -9,9 +9,9 @@ const Navbar = () => {
       <div className='flex gap-2 items-center'>
         <span className='font-bold text-xl'>Volun<span className='text-yellow-600'>teersPulse</span></span>
       </div>
-      <div className='flex-1 flex justify-center'>
-        <ul className='menu menu-horizontal px-1'>
-          <li>
+      <div className='flex-1 flex justify-center sm:flex text-center ml-5 '>
+        <ul className='menu menu-horizontal px-1 '>
+          <li >
             <NavLink 
               className={({ isActive }) => isActive ? 'font-bold text-green-600 underline text-xl' : 'font-bold text-xl'}
               to='/'
