@@ -13,10 +13,10 @@ const MyPosts = () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/my-posts?email=${user?.email}`,{withCredentials:true}
+        ` https://assignment-11-server-side-navy.vercel.app/my-posts?email=${user?.email}`,{withCredentials:true}
       );
       setMyPosts(response.data);
-      console.log("Fetched posts:", response.data);
+      // console.log("Fetched posts:", response.data);
     } catch (error) {
       console.error("Error fetching my posts:", error);
     } finally {
@@ -33,7 +33,7 @@ const MyPosts = () => {
   const handleDeletePost = async (postId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/posts/${postId}`
+        ` https://assignment-11-server-side-navy.vercel.app/posts/${postId}`
       );
       setMyPosts(myPosts.filter((post) => post._id !== postId));
       toast.success("Post deleted successfully"); // Show success toast

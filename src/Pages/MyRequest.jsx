@@ -12,7 +12,7 @@ const MyRequests = () => {
     const fetchRequests = async () => {
       setIsLoading(true);
       try {
-        const response = await axios.get(`http://localhost:5000/myRequest/${user?.email}`,{withCredentials:true});
+        const response = await axios.get(` https://assignment-11-server-side-navy.vercel.app/myRequest/${user?.email}`,{withCredentials:true});
         setRequests(response.data);
       } catch (error) {
         console.error('Error fetching organizer requests:', error);
@@ -28,7 +28,7 @@ const MyRequests = () => {
 
   const handleApprove = async (id) => {
     try {
-      const response = await axios.patch(`http://localhost:5000/myRequestApprove/${id}`);
+      const response = await axios.patch(` https://assignment-11-server-side-navy.vercel.app/myRequestApprove/${id}`);
       if (response.status === 200) {
         toast.success('Request approved successfully');
         updateRequestStatus(id, 'Approved');
@@ -41,7 +41,7 @@ const MyRequests = () => {
 
   const handleReject = async (id) => {
     try {
-      const response = await axios.patch(`http://localhost:5000/myRequest/${id}/reject`);
+      const response = await axios.patch(` https://assignment-11-server-side-navy.vercel.app/myRequest/${id}/reject`);
       if (response.status === 200) {
         toast.success('Request rejected successfully');
         updateRequestStatus(id, 'Rejected');
@@ -63,7 +63,7 @@ const MyRequests = () => {
   if (isLoading) return <p>Data is still loading...</p>;
 
   return (
-    <section className='mx-auto container'>
+    <section className='mx-auto container mb-4'>
       <h1 className='text-center font-bold'>Organizer Requests ({requests.length} Requests)</h1>
       <div className='flex flex-col mt-6 mx-auto container'>
         <div className='-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>

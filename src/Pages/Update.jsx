@@ -34,7 +34,7 @@ const Update = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/update/${updatePost._id}`,
+        ` https://assignment-11-server-side-navy.vercel.app/update/${updatePost._id}`,
         updatedItem
       );
       if (response.status === 200) {

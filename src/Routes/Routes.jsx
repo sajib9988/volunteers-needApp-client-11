@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       {
         path: '/update/:id',
         element: <Update/>,
-        loader: ({params})=> fetch(`http://localhost:5000/update/${params.id}`),
+        loader: ({params})=> fetch(` https://assignment-11-server-side-navy.vercel.app/update/${params.id}`),
       },
       {
         path: '/add-volunteer-post',
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       {
         path: '/detailsPage/:id',
         element: <PrivateRoute><NeedVolunteerDetails /></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:5000/detailsPage/${params.id}`),
+        loader: ({ params }) => fetch(` https://assignment-11-server-side-navy.vercel.app/detailsPage/${params.id}`),
       }
       ,
       
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       {
         path: '/myRequest',
         element: <MyRequest />,
-        // loader: ({params})=> fetch(`http://localhost:5000/myRequest/${params.email}`)
+        // loader: ({params})=> fetch(` https://assignment-11-server-side-navy.vercel.app/myRequest/${params.email}`)
       },
       {
         path: '/volunteer-requests',

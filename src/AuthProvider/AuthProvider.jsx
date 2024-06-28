@@ -47,10 +47,10 @@ const AuthProvider = ({ children }) => {
 
     const logOut = async () => {
         setLoading(true);
-        const { data } = await axios('http://localhost:5000/logout', {
+        const { data } = await axios(' https://assignment-11-server-side-navy.vercel.app/logout', {
           withCredentials: true,
         });
-        console.log(data);
+        // console.log(data);
         await signOut(auth);
         setLoading(false);
     }
@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
     // 5. Effect to Observe Auth State Changes
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-          console.log("user in the auth state changed", currentUser);
+        //   console.log("user in the auth state changed", currentUser);
           setUser(currentUser);
           setLoading(false);
         });

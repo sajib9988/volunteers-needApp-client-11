@@ -3,7 +3,7 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaMapMarkerAlt, FaPhon
 
 const Footer = () => {
     return (
-        <footer className="bg-black text-white p-8 mb-2 mx-auto container rounded">
+        <footer className="bg-black text-white p-8 mb-2 mt-3 mx-auto container rounded">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <h2 className="text-xl font-bold mb-4">About Us</h2>

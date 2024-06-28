@@ -42,18 +42,18 @@ const Register = () => {
 
     try {
       const result = await createUser(email, password);
-      console.log("User created:", result.user);
+      // console.log("User created:", result.user);
       await updateUserProfile(name, photoUrl);
       toast.success("Registration successful and profile updated!");
-      console.log("Profile updated with name and photo URL.");
+      // console.log("Profile updated with name and photo URL.");
 
-      const { data } = await axios.post(
-        `http://localhost:5000/jwt`,
+         await axios.post(
+        ` https://assignment-11-server-side-navy.vercel.app/jwt`,
         { email: result?.user?.email },
         { withCredentials: true }
       );
 
-      console.log("JWT token received:", data);
+      // console.log("JWT token received:", data);
       toast.success("JWT token received!");
       // Optionally redirect the user
       navigate("/login");

@@ -7,13 +7,13 @@ const Navbar = () => {
   return (
     <div className='navbar bg-base-100 shadow-sm container px-4 mx-auto flex justify-between items-center'>
       <div className='flex gap-2 items-center'>
-        <span className='font-bold'>Volunteer</span>
+        <span className='font-bold text-xl'>Volun<span className='text-yellow-600'>tee</span>r</span>
       </div>
       <div className='flex-1 flex justify-center'>
         <ul className='menu menu-horizontal px-1'>
           <li>
             <NavLink 
-              className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+              className={({ isActive }) => isActive ? 'font-bold text-green-600 underline text-xl' : 'font-bold text-xl'}
               to='/'
             >
               Home
@@ -21,7 +21,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink 
-              className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+              className={({ isActive }) => isActive ? 'font-bold text-green-600 underline text-xl' : 'font-bold text-xl'}
               to='/all-posts'
             >
               All Post
@@ -34,7 +34,7 @@ const Navbar = () => {
           {!user && (
             <li>
               <NavLink 
-                className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+                className={({ isActive }) => isActive ? 'font-bold text-green-600 underline text-xl' : 'font-bold text-xl'}
                 to='/login'
               >
                 Login
@@ -72,7 +72,7 @@ const Navbar = () => {
               </li>
               <li>
                 <NavLink 
-                  className={({ isActive }) => isActive ? 'font-bold text-green-600 underline' : 'font-bold'}
+                  className={({ isActive }) => isActive ? 'font-bold text-green-600 underline ' : 'font-bold '}
                   to='/my-posts'
                 >
                   My Posts

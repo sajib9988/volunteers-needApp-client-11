@@ -12,7 +12,7 @@ const Cards = () => {
   const fetchPosts = async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get("http://localhost:5000/posts"); // Adjust endpoint as per your API
+      const { data } = await axios.get(" https://assignment-11-server-side-navy.vercel.app/posts"); // Adjust endpoint as per your API
       setAllPosts(data);
     } catch (error) {
       console.error("Error fetching posts:", error);

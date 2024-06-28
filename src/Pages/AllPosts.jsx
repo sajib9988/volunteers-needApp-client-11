@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const AllPosts = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -11,7 +13,7 @@ const AllPosts = () => {
     setIsLoading(true);
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/posts"
+        " https://assignment-11-server-side-navy.vercel.app/posts"
       ); // Adjust endpoint as per your API
       setAllPosts(data);
     } catch (error) {
@@ -26,6 +28,11 @@ const AllPosts = () => {
     fetchPosts(); // Fetch all posts initially
   }, []);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1500, // Customize the duration
+    });
+  }, []);
   return (
     <div className="container mx-auto px-4 py-8 mt-6">
       <h1 className="text-2xl font-bold mb-6 text-center">All Posts</h1>
@@ -37,6 +44,7 @@ const AllPosts = () => {
             <div
               key={post._id}
               className="bg-white p-4 rounded-md shadow-md flex flex-col justify-between"
+              data-aos="flip-left" 
             >
               <img
                 src={post.thumbnail}
