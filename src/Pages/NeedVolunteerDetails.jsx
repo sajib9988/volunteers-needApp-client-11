@@ -15,24 +15,27 @@ const NeedVolunteerDetails = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const need = useLoaderData();
+  console.log(need)
+
 
   // Destructure properties from the `need` object
   const {
-    _id,                // Unique identifier for the volunteer post
-    postTitle,          // Title of the volunteer post
-    description,        // Description of the volunteer post
-    location,           // Location where volunteers are needed
-    volunteersNeeded,   // Number of volunteers needed
-    deadline,           // Deadline to apply for volunteering
-    category,           // Category of the volunteer post (e.g., Healthcare)
-    organizer,          // Organizer details (name and email are nested within this object)
-    thumbnail,          // URL of the thumbnail image for the post
+    _id,                
+    postTitle,         
+    description,       
+    location,          
+    volunteersNeeded,   
+    deadline,           
+    category,           
+    organizer,         
+    thumbnail,         
   } = need;
   const { 
     name: organizerName, // Organizer's name
-    email: organizerEmail // Organizer's email
+    email: organizerEmail 
+    
   } = organizer;
-
+   console.log('organizer', organizer)
   const [startDate, setStartDate] = useState(new Date(deadline));
   const [formValues, setFormValues] = useState({
     email: '',

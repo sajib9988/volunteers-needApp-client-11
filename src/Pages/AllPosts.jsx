@@ -13,7 +13,7 @@ const AllPosts = () => {
     setIsLoading(true);
     try {
       const { data } = await axios.get(
-        " https://assignment-11-server-side-navy.vercel.app/posts"
+        "https://assignment-11-server-side-navy.vercel.app/posts"
       ); // Adjust endpoint as per your API
       setAllPosts(data);
     } catch (error) {

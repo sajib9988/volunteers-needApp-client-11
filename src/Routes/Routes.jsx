@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       {
         path: '/detailsPage/:id',
         element: <PrivateRoute><NeedVolunteerDetails /></PrivateRoute>,
-        loader: ({ params }) => fetch(` https://assignment-11-server-side-navy.vercel.app/detailsPage/${params.id}`),
+        loader: ({ params }) => fetch(`https://assignment-11-server-side-navy.vercel.app/detailsPage/${params.id}`),
       }
       ,
       

@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <div className='navbar bg-base-100 shadow-sm container px-4 mx-auto flex justify-between items-center'>
       <div className='flex gap-2 items-center'>
-        <span className='font-bold text-xl'>Volun<span className='text-yellow-600'>tee</span>r</span>
+        <span className='font-bold text-xl'>Volun<span className='text-yellow-600'>teersPulse</span></span>
       </div>
       <div className='flex-1 flex justify-center'>
         <ul className='menu menu-horizontal px-1'>

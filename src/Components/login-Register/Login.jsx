@@ -15,10 +15,10 @@ const Login = () => {
     const from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
-        if (user && !loading) {
-            navigate(from, { replace: true });
+        if (user && !location.state) {
+          navigate('/');
         }
-    }, [navigate, loading, from, user]);
+      }, [user]);
 
     const handleGoogleSignIn = async () => {
         try {
@@ -35,7 +35,8 @@ const Login = () => {
             
          
             toast.success('SignIn Successful');
-            navigate(from, { replace: true });
+            // navigate(from, { replace: true });
+            navigate(location?.state ? location.state : '/');
         } catch (err) {
             console.log(err);
             toast.error(err?.message);
