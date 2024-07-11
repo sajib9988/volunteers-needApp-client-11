@@ -13,7 +13,7 @@ const Navbar = () => {
         <ul className='menu menu-horizontal px-1 '>
           <li >
             <NavLink 
-              className={({ isActive }) => isActive ? 'font-bold text-green-600 underline text-xl' : 'font-bold text-xl'}
+              className={({ isActive }) => isActive ? 'font-bold text-green-600 underline text-xl sm:mt-10' : 'font-bold text-xl'}
               to='/'
             >
               Home
